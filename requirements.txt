@@ -13,3 +13,4 @@ python-dotenv==0.21.0
 typing-extensions==4.4.0
 Werkzeug==2.2.2
 zipp==3.10.0
+mysql-connector-python==8.0.31
