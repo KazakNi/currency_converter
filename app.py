@@ -8,8 +8,8 @@ def show_user_profile(username):
     return f'User {escape(username)}'
 
 @app.route('/post/<int:post_id>')
-def show_user_profile(username):
-    return f'User {escape(username)}'
+def show_posts(post_id):
+    return f'Post {escape(post_id)}'
 
 @app.route("/")
 def index() -> str:
