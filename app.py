@@ -1,3 +1,5 @@
+import mysql.connector
+import json
 from flask import Flask
 from markupsafe import escape
 
@@ -18,3 +20,24 @@ def index() -> str:
 @app.route("/hello/")
 def hello_world() -> str:
     return "<p>Hello, world!</p>"
+
+@app.route('/widgets')
+def get_widgets():
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1",
+        database="inventory"
+    )
+    cursor = mydb.cursor()
+
+    cursor.execute("SELECT * FROM widgets")
+
+    row_headers = [x[0] for x in cursor.description]
+    results = cursor.fetchall()
+    json_data = []
+    for result in results:
+        json_data.append(dict(zip(row_headers, result)))
+    cursor.close()
+
+    return json.dump(json_data)
