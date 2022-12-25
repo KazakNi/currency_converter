@@ -1,6 +1,6 @@
-from typing import Union
+from typing import Union, Set, List
 from fastapi import FastAPI, Query
-from pydantic import BaseModel
+from pydantic import BaseModel, HttpUrl, Field
 
 app = FastAPI()
 
@@ -15,11 +15,17 @@ async def read_item(user_id: int, item_id: str, q: Union[str, None] = None, shor
         )
     return item
 
-class Item(BaseModel):
+class Image(BaseModel):
+    url: HttpUrl
     name: str
+
+class Item(BaseModel):
+    name: str = Field(example="Foo")
     description: Union[str, None] = None
     price: float
     tax: Union[float, None] = None
+    tags: Set[str] = set()
+    image: Union[List[Image], None] = None
 
 @app.post("/items/")
 async def create_item(item: Item):
