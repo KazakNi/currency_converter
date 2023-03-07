@@ -29,10 +29,10 @@ def calculation(exchange_currency, cache, user_currency_value, user_currency) ->
 
 def main() -> None:
     cache = {}
-    user_currency = input()
-    exchange_currency = input()
+    user_currency = input('Введите код имеющейся валюты')
+    exchange_currency = input('Введите валюту продажи')
     try:
-        user_currency_value = float(input())
+        user_currency_value = float(input('Введите сумму Вашей валюты'))
     except Exception as e:
         print(f'Error while input {e}')
     cache['eur'] = get_exchange_rate(user_currency)['eur']['rate']
