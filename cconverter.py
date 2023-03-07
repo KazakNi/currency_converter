@@ -31,6 +31,8 @@ def main() -> None:
     cache = {}
     user_currency = input('Введите код имеющейся валюты')
     exchange_currency = input('Введите валюту продажи')
+    if exchange_currency == '':
+        sys.exit("No currency input")
     try:
         user_currency_value = float(input('Введите сумму Вашей валюты'))
     except Exception as e:
